@@ -5,7 +5,6 @@ import { ExtendedRequest } from './extended-request';
 import { Logger } from './logger';
 import { LooseObject } from './loose-object';
 import { ValidationFailure } from './validation-failure';
-import { OtpPayload } from './otp-payload';
 
 export {
   AppContext,
@@ -14,6 +13,5 @@ export {
   ExtendedRequest,
   Logger,
   LooseObject,
-  OtpPayload,
   ValidationFailure,
 };
