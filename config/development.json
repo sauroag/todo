@@ -1,7 +1,4 @@
 {
-  "jwt": {
-    "key": "secret-key-for-jwt-signing"
-  },
   "logger": {
     "console": true
   },
