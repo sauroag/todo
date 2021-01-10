@@ -11,5 +11,5 @@ export {
   Model,
   Mongoose,
   QueryOptions,
-  Repositories
+  Repositories,
 };

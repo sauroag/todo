@@ -1,4 +1,4 @@
 
-import { BaseRepository } from './base-repository';
+import { TodoRepository } from './todo-repository';
 
-export { BaseRepository };
+export { TodoRepository };

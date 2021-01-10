@@ -10,14 +10,15 @@ logger.info('www - Initializing connection to Mongo Store...');
 
 const mongoStore = new Mongoose.MongoStore();
 
-const respositoryContext = {
+const repositoryContext = {
   logger,
   store: mongoStore,
   translate: i18n.__,
 };
 
 const appContext: AppContext = {
-  logger
+  logger,
+  todoRepository: new Repositories.TodoRepository(repositoryContext),
 };
 
 mongoStore

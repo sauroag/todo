@@ -1,3 +1,4 @@
+import todo from './todo';
 import config from 'config';
 import {
   connect,
@@ -194,9 +195,9 @@ export class MongoStore implements IDataStore {
   private getModel<T extends Model.BaseModel>(
     modelFactory: Model.ModelFactory<T>,
   ): MongoosModel<Document> {
-    // if (modelFactory.getType() === typeof Model.Account) {
-      // return account;
-    // }
+    if (modelFactory.getType() === typeof Model.Todo) {
+      return todo;
+    }
     return null;
   }
 }

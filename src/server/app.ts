@@ -9,6 +9,7 @@ import path from 'path';
 import {
   BaseController,
   HealthCheckController,
+  TodoController,
 } from '@controllers';
 import { ErrorHandler } from '@middleware';
 import { EventListeners, logger } from '@server';
@@ -87,6 +88,7 @@ export class App {
   public initializeControllers() {
     const controllers: BaseController[] = [
       new HealthCheckController(this.ctx),
+      new TodoController(this.ctx),
     ];
 
     for (const ctrl of controllers) {
