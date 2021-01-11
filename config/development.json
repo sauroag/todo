@@ -1,0 +1,14 @@
+{
+  "logger": {
+    "console": true
+  },
+  "mongoDb": {
+    "uri": "mongodb://localhost:27017/node-development"
+  },
+  "webApp": {
+    "baseUrl": "http://localhost:8080"
+  },
+  "www": {
+    "port": 4200
+  }
+}
