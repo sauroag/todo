@@ -8,12 +8,12 @@ export class TodoRepository extends BaseRepository<Model.Todo> {
     super(context);
   }
   public async getTodoData(
-    topicId: string,
+    id: string,
   ): Promise<Model.Todo> {
     return new Promise(async (resolve, reject) => {
-      const topicObjectId = this.toObjectId(topicId);
+      const objectId = this.toObjectId(id);
       const data = await this.findOne({
-        _id: topicObjectId,
+        _id: objectId,
       });
       resolve(data);
     });
@@ -23,19 +23,45 @@ export class TodoRepository extends BaseRepository<Model.Todo> {
     data: Model.Todo,
   ): Promise<Model.Todo> {
     return new Promise(async (resolve, reject) => {
-      const topicObjectId = this.toObjectId(data._id);
+      const titleObjectId = this.toObjectId(data._id);
       await this.update(
         {
-          _id: topicObjectId,
+          _id: titleObjectId,
         },
         {
           $set:
           {
-            'todo.$.topic': data.title,
-            'todo.$.description': data.description,
+            title: data.title,
+            description: data.description,
           },
         });
       resolve(data);
     });
+  }
+
+  public async deleteData(
+    id: string,
+  ): Promise<any> {
+    return new Promise(async (resolve, reject) => {
+      const titleObjectId = this.toObjectId(id);
+      await this.deleteMany(
+        {
+          _id: titleObjectId,
+        });
+      resolve({
+        id: titleObjectId,
+      });
+    });
+  }
+
+  protected modelFactory(): Model.ModelFactory<Model.Todo> {
+    return {
+      getType() {
+        return typeof Model.Todo;
+      },
+      create(json: any) {
+        return new Model.Todo(json);
+      },
+    };
   }
 }

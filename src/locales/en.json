@@ -1,4 +1,10 @@
 {
+  "DEFAULT_ERRORS": {
+    "RESOURCE_NOT_FOUND": "Requested resource not found.",
+    "INTERNAL_SERVER_ERROR": "Internal server error. Please try again later.",
+    "VALIDATION_FAILED": "Validation failed. Please modify the request and try again.",
+    "PARAMETER_NOT_SENT": "Please send the required parameters"
+  },
   "MESSAGES": {
     "HEALTHCHECK": "OK"
   }
