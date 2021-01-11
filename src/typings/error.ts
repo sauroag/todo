@@ -6,42 +6,9 @@ export class AppError extends Error {
 }
 
 // tslint:disable-next-line: max-classes-per-file
-export class EmailVerificationError extends AppError {
-  status: string = 'DEFAULT_ERRORS.EMAIL_VERIFICATION_FAILED';
+export class ParametersError extends AppError {
+  status: string = 'DEFAULT_ERRORS.PARAMETER_NOT_SENT';
   statusCode: number = 400;
-
-  constructor(msg: string) {
-    super(msg);
-  }
-}
-
-// tslint:disable-next-line: max-classes-per-file
-export class PhoneVerificationError extends AppError {
-  status: string = 'DEFAULT_ERRORS.PHONE_VERIFICATION_FAILED';
-  statusCode: number = 400;
-
-  constructor(msg: string) {
-    super(msg);
-  }
-}
-
-// tslint:disable-next-line: max-classes-per-file
-export class ValidationError extends AppError {
-  status: string = 'DEFAULT_ERRORS.VALIDATION_FAILED';
-  statusCode: number = 400;
-  failures: ValidationFailure[];
-
-  constructor(msg: string, failures: ValidationFailure[]) {
-    super(msg);
-    this.failures = failures;
-  }
-}
-
-// tslint:disable-next-line: max-classes-per-file
-export class AuthenticationError extends AppError {
-  status: string = 'DEFAULT_ERRORS.AUTHENTICATION_FAILED';
-  statusCode: number = 401;
-
   constructor(msg: string) {
     super(msg);
   }

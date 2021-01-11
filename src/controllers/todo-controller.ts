@@ -49,6 +49,12 @@ export class TodoController extends BaseController {
     next: NextFunction,
   ) => {
     const { title, description } = req.body;
+    if (title == null || description == null) {
+      const valError = new Errors.ParametersError(
+        res.__('DEFAULT_ERRORS.PARAMETER_NOT_SENT'),
+      );
+      return next(valError);
+    }
     const todo = await this.appContext.todoRepository.save(
       new Model.Todo({
         title,
@@ -75,6 +81,12 @@ export class TodoController extends BaseController {
   ) => {
     const { title, description } = req.body;
     const { id } = req.params;
+    if (id == null || (title == null && description == null)) {
+      const valError = new Errors.ParametersError(
+        res.__('DEFAULT_ERRORS.PARAMETER_NOT_SENT'),
+      );
+      return next(valError);
+    }
     const todo = await this.appContext.todoRepository.updateData(
       new Model.Todo({
         title,
