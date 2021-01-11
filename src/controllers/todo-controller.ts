@@ -25,16 +25,21 @@ export class TodoController extends BaseController {
       this.createTodo,
     );
     this.router.post(
-      `${this.basePath}/:_id/`,
+      `${this.basePath}/get/:id/`,
       this.getFromId,
     );
     this.router.post(
-      `${this.basePath}/update/:topic_id/`,
+      `${this.basePath}/update/:id/`,
       this.updateTodo,
     );
     this.router.get(
         `${this.basePath}/getall/`,
         this.getAll,
+      );
+
+    this.router.get(
+        `${this.basePath}/delete/:id`,
+        this.delete,
       );
   }
 
@@ -43,10 +48,10 @@ export class TodoController extends BaseController {
     res: Response,
     next: NextFunction,
   ) => {
-    const { topic, description } = req.body;
+    const { title, description } = req.body;
     const todo = await this.appContext.todoRepository.save(
       new Model.Todo({
-        topic,
+        title,
         description,
       }),
     );
@@ -58,9 +63,9 @@ export class TodoController extends BaseController {
     res: Response,
     next: NextFunction,
   ) => {
-    const { _id } = req.params;
-    const data = this.appContext.todoRepository.getTodoData(_id);
-    res.json(data);
+    const { id } = req.params;
+    const data = await this.appContext.todoRepository.getTodoData(id);
+    res.status(201).json(data);
   }
 
   private updateTodo = async (
@@ -68,11 +73,13 @@ export class TodoController extends BaseController {
     res: Response,
     next: NextFunction,
   ) => {
-    const { topic, description } = req.body;
+    const { title, description } = req.body;
+    const { id } = req.params;
     const todo = await this.appContext.todoRepository.updateData(
       new Model.Todo({
-        topic,
+        title,
         description,
+        _id: id,
       }),
     );
     res.status(201).json(todo.serialize());
@@ -84,6 +91,16 @@ export class TodoController extends BaseController {
     next: NextFunction,
   ) => {
     const todo = await this.appContext.todoRepository.getAll();
+    res.status(201).json(todo);
+  }
+
+  private delete = async (
+    req: ExtendedRequest,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    const { id } = req.params;
+    const todo = await this.appContext.todoRepository.deleteData(id);
     res.status(201).json(todo);
   }
 }
